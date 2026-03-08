@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:stable
+    ports:
+      - 8080:80
+    networks:
+      - webnet
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: root 
+    networks:
+      - webnet
+    volumes:
+      - ./data:/var/lib/mysql
+networks:
+  webnet:
+    driver: bridge
