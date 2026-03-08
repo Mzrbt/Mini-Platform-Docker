@@ -1,0 +1,21 @@
+---
+- name: docker
+  hosts: all
+  become: true
+  tasks:
+    - name: Apt update
+      ansible.builtin.apt:
+        update_cache: true
+    - name: Docker installation
+      apt:
+        name: docker.io
+        state: latest
+    - name: Docker compose installation
+      apt:
+        name: docker-compose
+        state: latest
+    - name: Docker start
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
